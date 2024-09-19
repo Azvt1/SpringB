@@ -3,11 +3,13 @@ package com.example.booking_service.controller;
 import com.example.booking_service.entity.Booking;
 import com.example.booking_service.dto.BookingDTO;
 import com.example.booking_service.service.BookingService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @RestController
@@ -31,6 +33,19 @@ public class BookingController {
     public ResponseEntity<List<Booking>> getBookingsByUserId(@PathVariable Long userId) {
         List<Booking> bookings = bookingService.getBookingsByUserId(userId);
         return ResponseEntity.ok(bookings);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Booking>> getAllBookings() {
+        List<Booking> bookings = bookingService.getAllBookings();
+        return ResponseEntity.ok(bookings);
+    }
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
+        bookingService.deleteBooking(id);
+        return ResponseEntity.noContent().build();
     }
 }
 

@@ -1,6 +1,7 @@
 package com.example.usermanagement_service.service;
 
 import com.example.booking_service.dto.BookingDTO;
+import com.example.booking_service.entity.Booking;
 import com.example.usermanagement_service.domain.entity.User;
 import com.example.usermanagement_service.domain.event.UserCreatedEvent;
 import com.example.usermanagement_service.domain.service.UserDomainService;
@@ -10,6 +11,7 @@ import com.example.usermanagement_service.infrastructure.repository.UserReposito
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -33,8 +35,12 @@ public class UserService {
 
     public User createUser(User user) {
         userDomainService.validateUser(user);  // Domain logic
+        ArrayList<Booking> bookingList = new ArrayList<>();
+        user.setBookingList(bookingList);
         User savedUser = userPersistenceAdapter.saveUser(user);
         publishEvent(new UserCreatedEvent(savedUser));
+
+
         return savedUser;
     }
 

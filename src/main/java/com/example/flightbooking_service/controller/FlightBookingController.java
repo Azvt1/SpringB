@@ -1,14 +1,17 @@
 package com.example.flightbooking_service.controller;
 
+import com.example.booking_service.dto.FlightBookingDTO;
 import com.example.flightbooking_service.domain.entity.FlightBooking;
 import com.example.flightbooking_service.service.FlightBookingService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/flightbookings")
+@RequestMapping("/api/flightbookings")
 public class FlightBookingController {
 
     private final FlightBookingService flightBookingService;
@@ -18,8 +21,9 @@ public class FlightBookingController {
     }
 
     @PostMapping
-    public FlightBooking createFlightBooking(@RequestBody FlightBooking flightBooking) {
-        return flightBookingService.createFlightBooking(flightBooking.getFlightNumber(), flightBooking.getDepartureDate(), flightBooking.getArrivalDate(), flightBooking.getUserId());
+    public ResponseEntity<FlightBookingDTO> createFlightBooking(@RequestBody FlightBookingDTO flightBookingDTO) {
+        FlightBookingDTO savedBooking = flightBookingService.createFlightBooking(flightBookingDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedBooking);
     }
 
     @GetMapping

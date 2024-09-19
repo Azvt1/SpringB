@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "bookings")
-public abstract class Booking {
+public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,5 +69,7 @@ public abstract class Booking {
     }
 
     // Abstract method for subclasses to implement
-    public abstract String getBookingType();
+    public String getBookingType() {
+        return bookingType;
+    }
 }
