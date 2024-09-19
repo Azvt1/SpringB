@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import com.example.usermanagement_service.domain.valueobject.Email;
 
 @Entity
+@Table(name = "app_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
