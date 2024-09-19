@@ -31,11 +31,16 @@ public class FlightBookingService {
 
     public FlightBookingDTO createFlightBooking(FlightBookingDTO flightBookingDTO) {
         // Convert DTO to FlightBooking entity and save it
-        FlightBooking flightBooking = new FlightBooking();
-        flightBooking.setUserId(flightBookingDTO.getUserId());
+        System.out.println("this is id:" + flightBookingDTO.getUserId());
+        FlightBooking flightBooking = new FlightBooking(flightBookingDTO.getUserId());
         flightBooking.setFlightNumber(flightBookingDTO.getFlightNumber());
         flightBooking.setBookingDate(flightBookingDTO.getBookingDate());
         flightBooking.setStatus(flightBookingDTO.getStatus());
+        flightBooking.setDepartureDate(flightBookingDTO.getDepartureDate());
+        flightBooking.setArrivalDate(flightBookingDTO.getArrivalDate());
+
+
+        System.out.println(flightBooking);
 
         flightBooking = flightBookingRepository.save(flightBooking);
         return convertToDTO(flightBooking);  // Convert back to DTO
@@ -46,7 +51,10 @@ public class FlightBookingService {
                 flightBooking.getUserId(),
                 flightBooking.getFlightNumber(),
                 flightBooking.getBookingDate(),
-                flightBooking.getStatus()
+                flightBooking.getStatus(),
+                flightBooking.getBookingType(),
+                flightBooking.getDepartureDate(),
+                flightBooking.getArrivalDate()
         );
     }
 

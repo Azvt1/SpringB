@@ -29,6 +29,22 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.CREATED).body(booking);
     }
 
+    @PutMapping("/{bookingId}/status")
+    public ResponseEntity<Void> updateBookingStatus(@PathVariable Long bookingId, @RequestBody String status) {
+        bookingService.updateBookingStatus(bookingId, status);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Booking> getBookingById(@PathVariable Long id) {
+        Booking booking = bookingService.findBookingById(id);
+        if (booking != null) {
+            return ResponseEntity.ok(booking);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Booking>> getBookingsByUserId(@PathVariable Long userId) {
         List<Booking> bookings = bookingService.getBookingsByUserId(userId);
