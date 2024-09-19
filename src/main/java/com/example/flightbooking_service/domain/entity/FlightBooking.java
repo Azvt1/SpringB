@@ -3,6 +3,8 @@ package com.example.flightbooking_service.domain.entity;
 import com.example.booking_service.entity.Booking;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class FlightBooking extends Booking {
 
@@ -11,8 +13,8 @@ public class FlightBooking extends Booking {
     private Long id;
 
     private String flightNumber;
-    private String departureDate;
-    private String arrivalDate;
+    private LocalDateTime departureDate;
+    private LocalDateTime arrivalDate;
 
     // Store the userId instead of the full User entity
     private Long userId;
@@ -24,15 +26,19 @@ public class FlightBooking extends Booking {
 
 
     // Parameterized constructor
-    public FlightBooking(String flightNumber, String departureDate, String arrivalDate, Long userId) {
+    public FlightBooking(String flightNumber, LocalDateTime departureDate, LocalDateTime arrivalDate, Long userId) {
         this.flightNumber = flightNumber;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.userId = userId;
     }
 
+    public FlightBooking(Long userId) {
+        this.userId = userId;
+    }
 
-    public FlightBooking(Long userId, String flightNumber, String departureDate, String arrivalDate, String status) {
+
+    public FlightBooking(Long userId, String flightNumber, LocalDateTime departureDate, LocalDateTime arrivalDate, String status) {
         super(userId, status);
         this.flightNumber = flightNumber;
         this.departureDate = departureDate;
@@ -55,19 +61,19 @@ public class FlightBooking extends Booking {
         this.flightNumber = flightNumber;
     }
 
-    public String getDepartureDate() {
+    public LocalDateTime getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(String departureDate) {
+    public void setDepartureDate(LocalDateTime departureDate) {
         this.departureDate = departureDate;
     }
 
-    public String getArrivalDate() {
+    public LocalDateTime getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(String arrivalDate) {
+    public void setArrivalDate(LocalDateTime arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 
@@ -90,4 +96,20 @@ public class FlightBooking extends Booking {
                 departureDate != null && arrivalDate != null &&
                 userId != null;
     }
+
+    @Override
+    public String toString() {
+        return "FlightBooking{" +
+                "id=" + id +
+                ", userId=" + getUserId() +
+                ", flightNumber='" + flightNumber + '\'' +
+                ", departureDate=" + departureDate +
+                ", arrivalDate=" + arrivalDate +
+                ", userId=" + userId +
+                ", bookingType='" + getBookingType() + '\'' +
+                ", bookingDate=" + getBookingDate() +
+                ", status='" + getStatus() + '\'' +
+                '}';
+    }
+
 }

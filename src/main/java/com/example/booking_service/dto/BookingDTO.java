@@ -1,35 +1,97 @@
 package com.example.booking_service.dto;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import org.springframework.cglib.core.Local;
+
 import java.time.LocalDateTime;
 
 public class BookingDTO {
-   // private Long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long userId;
     private String bookingType;
-    private String status;
-
+    // private String status;
     private LocalDateTime bookingDate;
 
+    private String flightNumber;
+
+    private LocalDateTime departureDate;
+
+    private LocalDateTime arrivalDate;
+
+    public BookingDTO() {
+    }
+
+
     // Constructors, Getters, and Setters
-    public BookingDTO(Long id, Long userId, String bookingType, String status, LocalDateTime bookingDate) {
-       // this.id = id;
+    public BookingDTO(Long userId, String bookingType, String status, LocalDateTime bookingDate) {
         this.userId = userId;
         this.bookingType = bookingType;
-        this.status = status;
+        // this.status = status;
         this.bookingDate = bookingDate;
+    }
+
+    // for flight
+
+    public BookingDTO(Long userId, LocalDateTime bookingDate, String status, String bookingType, String flightNumber, LocalDateTime departureDate, LocalDateTime arrivalDate) {
+        this.userId= userId;
+        this.bookingType = bookingType;
+        // this.status = status;
+        this.flightNumber = flightNumber;
+        this.bookingDate = bookingDate;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
     }
 
     public void setBookingType(String bookingType) {
         this.bookingType = bookingType;
     }
 
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setArrivalDate(LocalDateTime arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public void setDepartureDate(LocalDateTime departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public LocalDateTime getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public LocalDateTime getDepartureDate() {
+        return departureDate;
+    }
+
+
+
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
 
 //    public void setId(Long id) {
 //        this.id = id;
@@ -41,9 +103,9 @@ public class BookingDTO {
 
 
 
-    public String getStatus() {
-        return status;
-    }
+//    public String getStatus() {
+//        return status;
+//    }
 
 //    public Long getId() {
 //        return id;
