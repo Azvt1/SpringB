@@ -30,18 +30,18 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-//        return userService.getUserById(id)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
-//    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserWithBookings(@PathVariable Long id) {
-        UserDTO userDTO = userService.getUserWithBookings(id);
-        return ResponseEntity.ok(userDTO);
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return userService.getUserById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<UserDTO> getUserWithBookings(@PathVariable Long id) {
+//        UserDTO userDTO = userService.getUserWithBookings(id);
+//        return ResponseEntity.ok(userDTO);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {

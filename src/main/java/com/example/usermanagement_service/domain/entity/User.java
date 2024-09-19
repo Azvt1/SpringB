@@ -1,7 +1,11 @@
 package com.example.usermanagement_service.domain.entity;
 
+import com.example.booking_service.entity.Booking;
 import jakarta.persistence.*;
 import com.example.usermanagement_service.domain.valueobject.Email;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "app_user")
@@ -18,6 +22,10 @@ public class User {
     private String password;
     private String phoneNumber;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Transient
+    private List<Booking> bookingList = new ArrayList<>();
+
     // Constructors
     public User() {}
 
@@ -26,6 +34,15 @@ public class User {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.bookingList = new ArrayList<>();
+    }
+
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
+    }
+
+    public List<Booking> getBookingList() {
+        return bookingList;
     }
 
     // Getters and Setters
