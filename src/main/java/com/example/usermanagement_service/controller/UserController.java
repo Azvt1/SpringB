@@ -1,6 +1,7 @@
 package com.example.usermanagement_service.controller;
 
 import com.example.usermanagement_service.domain.entity.User;
+import com.example.usermanagement_service.dto.UserDTO;
 import com.example.usermanagement_service.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +30,17 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+//    @GetMapping("/{id}")
+//    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+//        return userService.getUserById(id)
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+//    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<UserDTO> getUserWithBookings(@PathVariable Long id) {
+        UserDTO userDTO = userService.getUserWithBookings(id);
+        return ResponseEntity.ok(userDTO);
     }
 
     @DeleteMapping("/{id}")
