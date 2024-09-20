@@ -21,8 +21,10 @@ curl -X POST http://localhost:8080/api/users \
   "password": "12345",
   "phoneNumber": "1234567890"
 }'
+```
 
 **Windows:**
+```bash
 curl -X POST http://localhost:8080/api/users ^
 -H "Content-Type: application/json" ^
 -d "{
@@ -31,7 +33,9 @@ curl -X POST http://localhost:8080/api/users ^
   \"password\": \"12345\",
   \"phoneNumber\": \"1234567890\"
 }"
+```
 
+**Output:**
 [
   {
     "id": 1,
