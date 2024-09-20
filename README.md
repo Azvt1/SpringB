@@ -1,9 +1,4 @@
-# SpringB
-Spring boot task B
-# Creating a README.md file with the provided information
-
-readme_content = """
-# Travel Booking Microservice
+# Travel Booking Microservice -SpringBoot Project B
 
 ## Project Overview
 
