@@ -1,2 +1,19 @@
 # SpringB
 Spring boot task B
+# Creating a README.md file with the provided information
+
+readme_content = """
+# Travel Booking Microservice
+
+## Project Overview
+
+The Travel Booking Microservice is designed to handle user management, flight bookings, and payment processing for a travel booking application. This system allows users to create and manage their profiles, book flights, and process payments efficiently. The application employs RESTful APIs to ensure seamless interactions between the client and server.
+
+## API Endpoints
+
+### 1. Create User
+
+**Request:**
+
+```http
+POST http://localhost:8080/api/users
