@@ -1,4 +1,4 @@
-# Travel Booking Microservice -SpringBoot Project B
+# Travel Booking Microservice - SpringBoot Poject Task B
 
 ## Project Overview
 
@@ -10,5 +10,39 @@ The Travel Booking Microservice is designed to handle user management, flight bo
 
 **Request:**
 
-```http
-POST http://localhost:8080/api/users
+**Mac:**
+
+```bash
+curl -X POST http://localhost:8080/api/users \
+-H 'Content-Type: application/json' \
+-d '{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "12345",
+  "phoneNumber": "1234567890"
+}'
+
+**Windows:**
+curl -X POST http://localhost:8080/api/users ^
+-H "Content-Type: application/json" ^
+-d "{
+  \"name\": \"John Doe\",
+  \"email\": \"john@example.com\",
+  \"password\": \"12345\",
+  \"phoneNumber\": \"1234567890\"
+}"
+
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": {
+      "emailAddress": "john@example.com"
+    },
+    "password": "12345",
+    "phoneNumber": "1234567890",
+    "bookingList": []
+  }
+]
+
+
