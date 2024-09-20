@@ -49,4 +49,68 @@ curl -X POST http://localhost:8080/api/users ^
   }
 ]
 
+### 2. Get User
+
+**Request:**
+
+**Mac:**
+
+```bash
+curl -X GET http://localhost:8080/api/users/1
+```
+
+**Windows:**
+```bash
+
+```
+
+**Output:**
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": {
+    "emailAddress": "john@example.com"
+  },
+  "password": "12345",
+  "phoneNumber": "1234567890",
+  "bookingList": []
+}
+
+
+
+### 3. Delete User
+
+**Request:**
+
+**Mac:**
+
+```bash
+
+```
+
+**Windows:**
+```bash
+
+```
+
+**Output:**
+
+
+### 4. Create Flight
+
+**Request:**
+
+**Mac:**
+
+```bash
+
+```
+
+**Windows:**
+```bash
+
+```
+
+**Output:**
+
 
