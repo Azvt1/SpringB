@@ -8,16 +8,10 @@ import java.time.LocalDateTime;
 @Entity
 public class FlightBooking extends Booking {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String flightNumber;
     private LocalDateTime departureDate;
     private LocalDateTime arrivalDate;
 
-    // Store the userId instead of the full User entity
-    private Long userId;
 
     // Default constructor
     public FlightBooking() {
@@ -26,32 +20,14 @@ public class FlightBooking extends Booking {
 
 
     // Parameterized constructor
-    public FlightBooking(String flightNumber, LocalDateTime departureDate, LocalDateTime arrivalDate, Long userId) {
-        this.flightNumber = flightNumber;
-        this.departureDate = departureDate;
-        this.arrivalDate = arrivalDate;
-        this.userId = userId;
-    }
-
-    public FlightBooking(Long userId) {
-        this.userId = userId;
-    }
-
-
     public FlightBooking(Long userId, String flightNumber, LocalDateTime departureDate, LocalDateTime arrivalDate, String status) {
         super(userId, status);
         this.flightNumber = flightNumber;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
     }
-        // Getters and Setters
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+        // Getters and Setters
 
     public String getFlightNumber() {
         return flightNumber;
@@ -78,13 +54,8 @@ public class FlightBooking extends Booking {
     }
 
     public Long getUserId() {
-        return userId;
+        return super.getUserId();
     }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     @Override
     public String getBookingType() {
         return "FLIGHT";
@@ -94,18 +65,18 @@ public class FlightBooking extends Booking {
     public boolean isValidBooking() {
         return flightNumber != null && !flightNumber.isEmpty() &&
                 departureDate != null && arrivalDate != null &&
-                userId != null;
+                super.getUserId() != null;
     }
 
     @Override
     public String toString() {
         return "FlightBooking{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", userId=" + getUserId() +
                 ", flightNumber='" + flightNumber + '\'' +
                 ", departureDate=" + departureDate +
                 ", arrivalDate=" + arrivalDate +
-                ", userId=" + userId +
+                ", userId=" + super.getUserId() +
                 ", bookingType='" + getBookingType() + '\'' +
                 ", bookingDate=" + getBookingDate() +
                 ", status='" + getStatus() + '\'' +

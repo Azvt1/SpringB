@@ -1,58 +1,49 @@
 package com.example.booking_service.dto;
 
 import com.example.flightbooking_service.domain.entity.FlightBooking;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
-public class FlightBookingDTO {
 
-    private Long userId;
+import java.time.LocalDateTime;
+
+public class FlightBookingDTO extends BookingDTO {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private Long id;
     private String flightNumber;
-    private LocalDateTime bookingDate;
-    private String status;
-
     private LocalDateTime departureDate;
-
     private LocalDateTime arrivalDate;
-
-    private String bookingType;
 
     // Constructors
     public FlightBookingDTO() {}
 
-    public FlightBookingDTO(Long userId, String flightNumber, LocalDateTime bookingDate, String status) {
-        this.userId = userId;
+    public FlightBookingDTO(Long userId, String flightNumber, LocalDateTime bookingDate, String status, LocalDateTime departureDate, LocalDateTime arrivalDate) {
+        super(userId, bookingDate, status, "FLIGHT");
         this.flightNumber = flightNumber;
-        this.bookingDate = bookingDate;
-        this.status = status;
-    }
-
-    public FlightBookingDTO(Long userId,  String flightNumber, LocalDateTime bookingDate, String status, String bookingType, LocalDateTime departureDate, LocalDateTime arrivalDate) {
-        this.userId = userId;
-        this.flightNumber = flightNumber;
-        this.bookingDate = bookingDate;
-        this.status = status;
-        this.bookingType = bookingType;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
     }
 
-
-    public LocalDateTime getArrivalDate() {
-        return arrivalDate;
+    public void setStatus(String status) {
+        super.setStatus(status);
     }
 
-    public void setBookingType(String bookingType) {
-        this.bookingType = bookingType;
+    // Getters and Setters
+    public String getFlightNumber() {
+        return flightNumber;
     }
 
-    public String getBookingType() {
-        return bookingType;
-    }
-
-    public void setArrivalDate(LocalDateTime arrivalDate) {
-        this.arrivalDate = arrivalDate;
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
     }
 
     public LocalDateTime getDepartureDate() {
@@ -63,36 +54,17 @@ public class FlightBookingDTO {
         this.departureDate = departureDate;
     }
 
-    // Getters and Setters
-    public Long getUserId() {
-        return userId;
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public LocalDateTime getArrivalDate() {
+        return arrivalDate;
     }
 
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
-    }
-
-    public LocalDateTime getBookingDate() {
-        return bookingDate;
-    }
-
-    public void setBookingDate(LocalDateTime bookingDate) {
-        this.bookingDate = bookingDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setArrivalDate(LocalDateTime arrivalDate) {
+        this.arrivalDate = arrivalDate;
     }
 }
+

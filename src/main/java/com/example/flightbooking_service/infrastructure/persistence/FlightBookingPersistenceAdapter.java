@@ -1,5 +1,6 @@
 package com.example.flightbooking_service.infrastructure.persistence;
 
+import com.example.booking_service.dto.FlightBookingDTO;
 import com.example.flightbooking_service.domain.entity.FlightBooking;
 import com.example.flightbooking_service.infrastructure.repository.FlightBookingRepository;
 import org.springframework.stereotype.Component;
@@ -28,9 +29,16 @@ public class FlightBookingPersistenceAdapter {
         return flightBookingRepository.findByUserId(id);
     }
 
-    public FlightBooking findSingleBookingById(Long id) {
-        return flightBookingRepository.findFlightBookingById(id);
+    public FlightBookingDTO findSingleBookingById(Long id) {
+        FlightBooking flightBooking = flightBookingRepository.findFlightBookingById(id);
+        return mapToDTO(flightBooking);
     }
+
+    private FlightBookingDTO mapToDTO(FlightBooking flightBooking) {
+        FlightBookingDTO dto = new FlightBookingDTO(flightBooking.getUserId(), flightBooking.getFlightNumber(), flightBooking.getBookingDate(), flightBooking.getStatus(), flightBooking.getDepartureDate(), flightBooking.getArrivalDate());
+        return dto;
+    }
+
 
     public void delete(Long id) {
         flightBookingRepository.deleteById(id);

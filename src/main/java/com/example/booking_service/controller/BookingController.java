@@ -26,6 +26,7 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<Booking> createBooking(@RequestBody BookingDTO bookingDTO) {
         Booking booking = bookingService.createBooking(bookingDTO);
+        System.out.println("Booking controller: " + bookingDTO.getUserId());
         return ResponseEntity.status(HttpStatus.CREATED).body(booking);
     }
 
@@ -52,8 +53,8 @@ public class BookingController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Booking>> getAllBookings() {
-        List<Booking> bookings = bookingService.getAllBookings();
+    public ResponseEntity<List<BookingDTO>> getAllBookings() {
+        List<BookingDTO> bookings = bookingService.getAllBookings();
         return ResponseEntity.ok(bookings);
     }
 
