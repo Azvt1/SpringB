@@ -46,6 +46,7 @@ public class PaymentService {
     }
 
     public void cancelPayment(Long bookingId) {
+
         // Update the booking status
         bookingServiceClient.updateBookingStatus(bookingId, "CANCELED");
     }
