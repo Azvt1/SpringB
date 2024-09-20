@@ -1,6 +1,7 @@
 package com.example.payment_service.service;
 
 import com.example.booking_service.entity.Booking;
+import com.example.flightbooking_service.domain.entity.FlightBooking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

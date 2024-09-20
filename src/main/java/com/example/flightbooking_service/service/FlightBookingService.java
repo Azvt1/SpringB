@@ -30,32 +30,32 @@ public class FlightBookingService {
     }
 
     public FlightBookingDTO createFlightBooking(FlightBookingDTO flightBookingDTO) {
-        // Convert DTO to FlightBooking entity and save it
-        System.out.println("this is id:" + flightBookingDTO.getUserId());
-        FlightBooking flightBooking = new FlightBooking(flightBookingDTO.getUserId());
-        flightBooking.setFlightNumber(flightBookingDTO.getFlightNumber());
-        flightBooking.setBookingDate(flightBookingDTO.getBookingDate());
-        flightBooking.setStatus(flightBookingDTO.getStatus());
-        flightBooking.setDepartureDate(flightBookingDTO.getDepartureDate());
-        flightBooking.setArrivalDate(flightBookingDTO.getArrivalDate());
-
-
-        System.out.println(flightBooking);
-
+        System.out.println("FlightBookingService: " + flightBookingDTO.getUserId());
+        FlightBooking flightBooking = new FlightBooking(
+                flightBookingDTO.getUserId(),
+                flightBookingDTO.getFlightNumber(),
+                flightBookingDTO.getDepartureDate(),
+                flightBookingDTO.getArrivalDate(),
+                "PENDING"
+        );
+        System.out.println("FlightBookingService after creating: " + flightBookingDTO.getUserId());
         flightBooking = flightBookingRepository.save(flightBooking);
-        return convertToDTO(flightBooking);  // Convert back to DTO
+        return convertToDTO(flightBooking);
     }
 
     private FlightBookingDTO convertToDTO(FlightBooking flightBooking) {
-        return new FlightBookingDTO(
+        System.out.println("Converting to dto" + flightBooking.getUserId());
+        FlightBookingDTO flightBookingDTO = new FlightBookingDTO(
                 flightBooking.getUserId(),
                 flightBooking.getFlightNumber(),
                 flightBooking.getBookingDate(),
                 flightBooking.getStatus(),
-                flightBooking.getBookingType(),
                 flightBooking.getDepartureDate(),
                 flightBooking.getArrivalDate()
         );
+
+        System.out.println("After creating in converting to dto: " + flightBookingDTO.getUserId());
+        return flightBookingDTO;
     }
 
 
@@ -68,7 +68,7 @@ public class FlightBookingService {
     }
 
 
-    public FlightBooking getFlightBooking(Long id) {
+    public FlightBookingDTO getFlightBooking(Long id) {
         return flightBookingPersistenceAdapter.findSingleBookingById(id);
     }
 

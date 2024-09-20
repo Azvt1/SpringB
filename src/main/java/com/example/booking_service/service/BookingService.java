@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +20,12 @@ public class BookingService {
 
     private final RestTemplate restTemplate;
 
-    public BookingService(BookingRepository bookingRepository, RestTemplate restTemplate) {
+    private final FlightBookingClient flightBookingClient;
+
+    public BookingService(BookingRepository bookingRepository, RestTemplate restTemplate, FlightBookingClient flightBookingClient) {
         this.bookingRepository = bookingRepository;
         this.restTemplate = restTemplate;
+        this.flightBookingClient = flightBookingClient;
     }
 
     // Create a new booking
@@ -32,12 +36,10 @@ public class BookingService {
                     bookingDTO,
                     FlightBookingDTO.class
             );
-            System.out.println(flightBookingDTO.getFlightNumber());
-            // Create a simple booking representation for your service (if needed)
+            System.out.println("Booking service: "  + flightBookingDTO.getUserId());
             Booking flightBooking = new Booking();
             flightBooking.setUserId(bookingDTO.getUserId());
             flightBooking.setBookingType("FLIGHT");
-//            flightBooking.setStatus(bookingDTO.getStatus());
             flightBooking.setBookingDate(bookingDTO.getBookingDate());
 
             // Save this as a simple record in your booking service (not FlightBooking entity)
@@ -81,8 +83,31 @@ public class BookingService {
         return bookingRepository.findById(id).orElse(null);
     }
 
-    public List<Booking> getAllBookings() {
-        return bookingRepository.findAll();
+    // public List<Booking> getAllBookings() {
+//        return bookingRepository.findAll();
+//    }
+
+    public List<BookingDTO> getAllBookings() {
+        List<Booking> bookings = bookingRepository.findAll();
+
+        List<BookingDTO> bookingDTOS = new ArrayList<>();
+
+        for (Booking booking: bookings) {
+            if (booking.getBookingType().equals("FLIGHT")) {
+                FlightBookingDTO flightBookingDTO = flightBookingClient.getFlightBookingById(booking.getId());
+                bookingDTOS.add(flightBookingDTO);
+            } else {
+                BookingDTO bookingDTO = new BookingDTO();
+                bookingDTO.setId(booking.getId());
+                bookingDTO.setUserId(booking.getUserId());
+                bookingDTO.setBookingDate(booking.getBookingDate());
+                bookingDTO.setBookingType(booking.getBookingType());
+
+                bookingDTOS.add(bookingDTO);
+            }
+        }
+
+        return bookingDTOS;
     }
 
     public void deleteBooking(Long id) {

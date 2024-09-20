@@ -22,8 +22,8 @@ public class FlightBookingController {
 
     @PostMapping
     public ResponseEntity<FlightBookingDTO> createFlightBooking(@RequestBody FlightBookingDTO flightBookingDTO) {
-        System.out.println(flightBookingDTO);
         FlightBookingDTO savedBooking = flightBookingService.createFlightBooking(flightBookingDTO);
+        System.out.println("FlightBooking Controller: " + flightBookingDTO.getUserId());
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBooking);
     }
 
@@ -33,7 +33,7 @@ public class FlightBookingController {
     }
 
     @GetMapping("/{id}")
-    public FlightBooking getFlightBooking(@PathVariable Long id) {
+    public FlightBookingDTO getFlightBooking(@PathVariable Long id) {
         return flightBookingService.getFlightBooking(id);
     }
 

@@ -1,10 +1,12 @@
 package com.example.booking_service.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import org.springframework.cglib.core.Local;
 
+import java.awt.print.Book;
 import java.time.LocalDateTime;
 
 public class BookingDTO {
@@ -12,9 +14,10 @@ public class BookingDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonProperty("userId")
     private Long userId;
     private String bookingType;
-    // private String status;
+    private String status;
     private LocalDateTime bookingDate;
 
     private String flightNumber;
@@ -31,8 +34,27 @@ public class BookingDTO {
     public BookingDTO(Long userId, String bookingType, String status, LocalDateTime bookingDate) {
         this.userId = userId;
         this.bookingType = bookingType;
-        // this.status = status;
+        this.status = status;
         this.bookingDate = bookingDate;
+    }
+
+    public BookingDTO(Long userId, LocalDateTime bookingDate, String status, String bookingType) {
+        this.userId = userId;
+        this.bookingDate = bookingDate;
+        this.status = status;
+        this.bookingType = bookingType;
+    }
+
+    public BookingDTO(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     // for flight
