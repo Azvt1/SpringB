@@ -113,4 +113,88 @@ curl -X GET http://localhost:8080/api/users/1
 
 **Output:**
 
+### 5. Get Flight
+
+**Request:**
+
+**Mac:**
+
+```bash
+
+```
+
+**Windows:**
+```bash
+
+```
+
+**Output:**
+
+### 6. Get Flight by UserId
+
+**Request:**
+
+**Mac:**
+
+```bash
+
+```
+
+**Windows:**
+```bash
+
+```
+
+**Output:**
+
+### 7. Delete Flight
+
+**Request:**
+
+**Mac:**
+
+```bash
+
+```
+
+**Windows:**
+```bash
+
+```
+
+**Output:**
+
+### 8. Make Payment
+
+**Request:**
+
+**Mac:**
+
+```bash
+
+```
+
+**Windows:**
+```bash
+
+```
+
+**Output:**
+
+### 9. Cancel Payment
+
+**Request:**
+
+**Mac:**
+
+```bash
+
+```
+
+**Windows:**
+```bash
+
+```
+
+**Output:**
 
