@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/payments")
 public class PaymentController {
@@ -27,8 +30,17 @@ public class PaymentController {
     }
 
     @PostMapping("/cancel/{bookingId}")
-    public ResponseEntity<Void> cancelPayment(@PathVariable Long bookingId) {
+    public ResponseEntity<Map<String, Object>> cancelPayment(@PathVariable Long bookingId) {
+        // Perform the cancel payment logic
         paymentService.cancelPayment(bookingId);
-        return ResponseEntity.status(HttpStatus.OK).build();
+
+        // Create a response map with the required fields
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", bookingId);
+        response.put("status", "Canceled");
+
+        // Return the response entity with the map
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
 }
